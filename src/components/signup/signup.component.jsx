@@ -30,7 +30,7 @@ class SignUp extends React.Component {
         e.preventDefault()
         const { displayName, email, password, confirmPassword } = this.state
         if (password !== confirmPassword) {
-            console.log('PAsswords don\'t match')
+            console.log('Passwords don\'t match')
             return
         }
         try {
