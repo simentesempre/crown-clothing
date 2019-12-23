@@ -20,7 +20,7 @@ const CategoryPage = ({ collection }) => {
 }
 
 const mapStateToProps = ({ shop: {collections}},  {match: { params }}) => ({
-    collection: collections.find(collection => collection.routeName === params.categoryId)
+    collection: collections[params.categoryId]
 })
 
 export default connect(mapStateToProps)(CategoryPage)
