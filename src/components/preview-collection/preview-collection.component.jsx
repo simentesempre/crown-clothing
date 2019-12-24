@@ -1,13 +1,14 @@
 import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
 
 import ItemCollection from '../item-collection/item-collection.component'
 
 import './preview-collection.styles.scss'
 
-const PreviewCollection = ({title, items}) => {
+const PreviewCollection = ({title, items, routeName, match}) => {
     return (
         <div className="collection-preview">
-            <h1 className="title">{title.toUpperCase()}</h1>
+            <h1 className="title"><Link to={`${match.url}/${routeName}`}>{title.toUpperCase()}</Link></h1>
             <div className="preview">
                 {
                     items
@@ -23,4 +24,4 @@ const PreviewCollection = ({title, items}) => {
     )
 }
 
-export default PreviewCollection
+export default withRouter(PreviewCollection)

@@ -44,7 +44,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 } */
 
 export const convertCollectionSnapshotToMap = (collections) => {
-    const transformedCollection = collections.docs.map(doc => {
+    return collections.docs.map(doc => {
         const { title, items } = doc.data()
         return {
             routeName: encodeURI(title.toLowerCase()),
@@ -52,8 +52,10 @@ export const convertCollectionSnapshotToMap = (collections) => {
             title, 
             items,
         }
-    })
-    return transformedCollection
+    }).reduce((prev, curr) => {
+        prev[curr.title.toLowerCase()] = curr
+        return prev
+    }, {})
 }
 
 firebase.initializeApp(config)
