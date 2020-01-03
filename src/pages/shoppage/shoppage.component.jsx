@@ -8,7 +8,7 @@ import CategoryPage from '../category/category.component'
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component'
 import withSpinner from '../../components/with-spinner/with-spinner.component'
 
-import { fetchCollectionStart } from '../../redux/shop/shop.actions'
+import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions'
 
 const CollectionsOverviewWithSpinner = withSpinner(CollectionsOverview)
 const CategoryPageWithSpinner = withSpinner(CategoryPage)
@@ -16,8 +16,8 @@ const CategoryPageWithSpinner = withSpinner(CategoryPage)
 class ShopPage extends React.Component  {
     
     componentDidMount() {
-        const { fetchCollectionStart } = this.props
-        fetchCollectionStart()
+        const { fetchCollectionStartAsync } = this.props
+        fetchCollectionStartAsync()
     }   
     render(){
         const { match, isFetching } = this.props
@@ -36,7 +36,7 @@ const mapStateToProps = ({isFetching}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchCollectionStart: () => dispatch(fetchCollectionStart())
+    fetchCollectionStartAsync: () => dispatch(fetchCollectionStartAsync())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShopPage)
