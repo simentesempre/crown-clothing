@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
@@ -13,22 +13,18 @@ import { fetchCollectionStartAsync } from '../../redux/shop/shop.actions'
 const CollectionsOverviewWithSpinner = withSpinner(CollectionsOverview)
 const CategoryPageWithSpinner = withSpinner(CategoryPage)
 
-class ShopPage extends React.Component  {
+const ShopPage = ({ match, isFetching, fetchCollectionStartAsync }) =>  {
     
-    componentDidMount() {
-        const { fetchCollectionStartAsync } = this.props
+    useEffect(() => {
         fetchCollectionStartAsync()
-    }   
-    render(){
-        const { match, isFetching } = this.props
-        return (
-            <div className="shop-page">
-                <Route exact path={`${match.path}`} render={props=> (<CollectionsOverviewWithSpinner isLoading={isFetching} {...props} />)} />
-                <Route path={`${match.path}/:categoryId`} render={props=> (<CategoryPageWithSpinner isLoading={isFetching} {...props} />)} />
-            </div>
-            
-        )
-    }
+    }, [fetchCollectionStartAsync]) 
+
+    return (
+        <div className="shop-page">
+            <Route exact path={`${match.path}`} render={props=> (<CollectionsOverviewWithSpinner isLoading={isFetching} {...props} />)} />
+            <Route path={`${match.path}/:categoryId`} render={props=> (<CategoryPageWithSpinner isLoading={isFetching} {...props} />)} />
+        </div>       
+    )
 }
 
 const mapStateToProps = ({isFetching}) => ({
